@@ -14,7 +14,7 @@ class Car(models.Model):
     model = models.TextField(null=False)
     twinturbo = models.BooleanField(default=False)
     mileage = models.IntegerField(null=False)
-    number = models.TextField(null=True)
+    price = models.IntegerField(null=True)
     
     owner = models.ForeignKey("Player", on_delete=models.SET_NULL, null=True)
 

@@ -5,39 +5,26 @@
 {% endblock %}
 
 {% block content %}
-    <br>
-    <div class="row justify-content-md-center" style="margin: auto;">
-        <div class="col-md-auto">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    {% for car in cars %}
+        <br>
+        <div class="row justify-content-md-center" style="margin: auto;">
+            <div class="col-md-auto">
+                <div class="card" style="width: 18rem; color: #353535;">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ car.model }}</h5>
+                    <p class="card-text">Владелец: {{ car.owner.name }} {{ car.owner.surname }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Пробег: {{ car.mileage }} км</li>
+                    <li class="list-group-item">Сервер: {{ car.owner.server }}</li>
+                    {% if car.twinturbo %}
+                        <li class="list-group-item">TwinTurbo: есть</li>
+                    {% else %}
+                        <li class="list-group-item">TwinTurbo: нету</li>
+                    {% endif %}
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-auto">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-auto">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-auto">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% endfor %}
 {% endblock %}
