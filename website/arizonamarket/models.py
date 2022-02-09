@@ -1,3 +1,17 @@
 from django.db import models
 
-# Create your models here.
+
+class Player(models.Model):
+    name = models.TextField(null=False)
+    surname = models.TextField(null=False)
+    server = models.TextField(null=False)
+
+
+class Car(models.Model):
+    model = models.TextField(null=False)
+    twinturbo = models.BooleanField(default=False)
+    mileage = models.IntegerField(null=False)
+    number = models.TextField(null=True)
+    
+    owner = models.ForeignKey("Player", on_delete=models.SET_NULL, null=True)
+

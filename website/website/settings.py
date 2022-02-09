@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'arizonamarket',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'hogger',
         'HOST': 'localhost',
-        'PORT': '<db_port>',
+        'PORT': '5432',
     }
 }
 
