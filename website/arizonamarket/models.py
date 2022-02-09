@@ -6,6 +6,9 @@ class Player(models.Model):
     surname = models.TextField(null=False)
     server = models.TextField(null=False)
 
+    def __str__(self):
+        return self.name
+
 
 class Car(models.Model):
     model = models.TextField(null=False)
@@ -14,4 +17,7 @@ class Car(models.Model):
     number = models.TextField(null=True)
     
     owner = models.ForeignKey("Player", on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return self.model
 
