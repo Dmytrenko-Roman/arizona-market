@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block content %}
-    {% for car in cars %}
-        <br>
-        <div class="row justify-content-md-center" style="margin: auto;">
+    <br>
+    <div class="row justify-content-md-center" style="margin: auto;">
+        {% for car in cars %}
             <div class="col-md-auto">
                 <div class="card" style="width: 18rem; color: #353535;">
                     <div class="card-body">
@@ -15,16 +15,24 @@
                     <p class="card-text">Владелец: {{ car.owner.name }} {{ car.owner.surname }}</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Пробег: {{ car.mileage }} км</li>
-                    <li class="list-group-item">Сервер: {{ car.owner.server }}</li>
-                    {% if car.twinturbo %}
-                        <li class="list-group-item">TwinTurbo: есть</li>
-                    {% else %}
-                        <li class="list-group-item">TwinTurbo: нету</li>
-                    {% endif %}
+                        <li class="list-group-item">Пробег: {{ car.mileage }} км</li>
+                        <li class="list-group-item">Сервер: {{ car.owner.server }}</li>
+
+                        {% if car.twinturbo %}
+                            <li class="list-group-item">TwinTurbo: есть</li>
+                        {% else %}
+                            <li class="list-group-item">TwinTurbo: нету</li>
+                        {% endif %}
+                        
+                        {% if car.price != 0 %}
+                            <li class="list-group-item">Цена: {{ car.price }}$</li>
+                        {% else %}
+                            <li class="list-group-item">Цена: договорная</li>
+                        {% endif %}
+                        
                     </ul>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock %}
