@@ -4,24 +4,26 @@
     Register
 {% endblock %}
 
-{% block content %} 
-
-{% load crispy_forms_tags %}         
+{% block content %}     
 
 <!--Register--> 
 <div class="container py-5">
-	<span>{{ message }}</span>
-	<h1>Register</h1>
+	{% if message %}
+		<div class="alert alert-success" role="alert">
+			{{ message }}
+		</div>
+	{% endif %}
+	<h2 class="text-center">Register</h2>
 	<form method="POST">
 		{% csrf_token %}
-		<!-- {{ register_form|crispy }} -->
 		<input type="text" placeholder="Username" class="form-control" name="username"><br>
 		<input type="text" placeholder="Email" class="form-control" name="email"><br>
-		<input type="text" placeholder="Password" class="form-control" name="password1"><br>
-		<input type="text" placeholder="Repeat the password" class="form-control" name="password2"><br>
+		<input type="password" placeholder="Password" class="form-control" name="password1"><br>
+		<input type="password" placeholder="Repeat the password" class="form-control" name="password2"><br>
 		<input type="text" placeholder="Server" class="form-control" name="server"><br>
-		<button class="btn btn-primary" type="submit">Register</button>
+		<button class="btn btn-primary btn-lg btn-info" type="submit">Register</button>
 	</form>
+	<br>
 	<p class="text-center">If you already have an account, <a href="{% url 'login' %}">login</a> instead.</p>
 </div>
 

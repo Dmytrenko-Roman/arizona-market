@@ -3,6 +3,18 @@ body {
   color: white;
 }
 
+form {
+  margin: auto;
+  width: 500px;
+  margin-top: 50px;
+}
+
+button {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0); 
+}
+
 .grid-container {
   grid-template-columns: repeat(4, 1fr);
 }
