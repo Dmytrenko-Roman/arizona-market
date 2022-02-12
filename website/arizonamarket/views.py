@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 
 from .models import Car
-from .forms import NewUserForm
+from .forms import CustomUserCreationForm
 
 def market(request):
     cars = Car.objects.all()
@@ -13,14 +13,14 @@ def market(request):
 
 def register_request(request):
 	if request.method == "POST":
-		form = NewUserForm(request.POST)
+		form = CustomUserCreationForm(request.POST)
 		if form.is_valid():
 			user = form.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
 			return redirect("market")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
-	form = NewUserForm()
+	form = CustomUserCreationForm()
 	return render (request=request, template_name="market/register.html", context={"register_form":form})
 
 
