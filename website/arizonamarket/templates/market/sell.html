@@ -1,0 +1,22 @@
+{% extends "market/base.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h2 class="text-center">Sell your car</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Username" class="form-control" name="username"><br>
+            <input type="text" placeholder="Email" class="form-control" name="email"><br>
+            <input type="password" placeholder="Password" class="form-control" name="password1"><br>
+            <input type="password" placeholder="Repeat the password" class="form-control" name="password2"><br>
+            <input type="text" placeholder="Server" class="form-control" name="server"><br>
+            <button class="btn btn-primary btn-lg btn-info" type="submit">Register</button>
+        </form>
+    {% else %}
+        <p class="text-center">You are not authenticated. If you want to sell your car, you need to <a href="{% url 'login' %}">login.</p>
+    {% endif %}
+{% endblock %}
