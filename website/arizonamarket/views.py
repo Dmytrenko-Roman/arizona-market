@@ -4,18 +4,37 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 
 from .models import Car
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CarSellForm
 
 
 def market(request):
     cars = Car.objects.all()
-    return render(
-        request=request, template_name='market/market.html', context={'cars': cars}
-    )
+
+    context = {
+        'cars': cars,
+    }
+
+    return render(request=request, template_name='market/market.html', context=context)
 
 
 def sell(request):
-    return render(request=request, template_name='market/sell.html')
+    msg = ''
+
+    if request.method == 'POST':
+        form = CarSellForm(request.POST)
+        if form.is_valid():
+            form.save()
+            msg = "Registration successful."
+        msg = "Unsuccessful registration. Invalid information."
+
+    form = CarSellForm()
+
+    context = {
+        'form': form,
+        'message': msg,
+    }
+
+    return render(request=request, template_name='market/sell.html', context=context)
 
 
 def register_request(request):
