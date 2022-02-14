@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 
-from .models import Car
+from .models import Car, CustomUser
 from .forms import CustomUserCreationForm, CarSellForm
 
 
@@ -23,9 +23,12 @@ def sell(request):
     if request.method == 'POST':
         form = CarSellForm(request.POST)
         if form.is_valid():
-            form.save()
-            msg = "Registration successful."
-        msg = "Unsuccessful registration. Invalid information."
+            car = form.save(commit=False)
+            car.owner = CustomUser.objects.get(pk=request.user.id)
+            car.save()
+            msg = "Successfully sold car!"
+        else:
+            msg = "Unsuccessful. Invalid information."
 
     form = CarSellForm()
 
