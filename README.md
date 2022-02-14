@@ -1,2 +1,2 @@
-# django-project
+# arizona-market
  Project on Django.
