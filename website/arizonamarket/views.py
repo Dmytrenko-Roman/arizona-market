@@ -14,6 +14,10 @@ def market(request):
     )
 
 
+def sell(request):
+    return render(request=request, template_name='market/sell.html')
+
+
 def register_request(request):
     msg = ''
 
