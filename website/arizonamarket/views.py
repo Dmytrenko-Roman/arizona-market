@@ -11,16 +11,16 @@ def market(request):
     cars = Car.objects.all()
 
     context = {
-        'cars': cars,
+        "cars": cars,
     }
 
-    return render(request=request, template_name='market/market.html', context=context)
+    return render(request=request, template_name="market/market.html", context=context)
 
 
 def sell(request):
-    msg = ''
+    msg = ""
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = CarSellForm(request.POST)
         if form.is_valid():
             car = form.save(commit=False)
@@ -33,15 +33,15 @@ def sell(request):
     form = CarSellForm()
 
     context = {
-        'form': form,
-        'message': msg,
+        "form": form,
+        "message": msg,
     }
 
-    return render(request=request, template_name='market/sell.html', context=context)
+    return render(request=request, template_name="market/sell.html", context=context)
 
 
 def register_request(request):
-    msg = ''
+    msg = ""
 
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -55,8 +55,8 @@ def register_request(request):
     form = CustomUserCreationForm()
 
     context = {
-        'register_form': form,
-        'message': msg,
+        "register_form": form,
+        "message": msg,
     }
 
     return render(
@@ -65,13 +65,13 @@ def register_request(request):
 
 
 def login_request(request):
-    msg = ''
+    msg = ""
 
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
@@ -85,8 +85,8 @@ def login_request(request):
     form = AuthenticationForm()
 
     context = {
-        'login_form': form,
-        'message': msg,
+        "login_form": form,
+        "message": msg,
     }
 
     return render(request=request, template_name="market/login.html", context=context)

@@ -9,11 +9,11 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'password1', 'password2', 'server')
+        fields = ("username", "email", "password1", "password2", "server")
 
     def save(self, commit=True):
         user = super(CustomUserCreationForm, self).save(commit=False)
-        user.email = self.cleaned_data['email']
+        user.email = self.cleaned_data["email"]
         if commit:
             user.save()
         return user
@@ -22,10 +22,10 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'email')
+        fields = ("username", "email")
 
 
 class CarSellForm(forms.ModelForm):
     class Meta:
         model = Car
-        fields = ('model', 'twinturbo', 'mileage', 'price')
+        fields = ("model", "twinturbo", "mileage", "price")
