@@ -6,22 +6,23 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        <h2 class="text-center">Sell your car</h2>
-        <form method="POST">
-            {% csrf_token %}
-            <input type="text" placeholder="Car model" class="form-control" name="model"><br>
+        <div class="container py-5">
+            <h2 class="text-center">Sell your car</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" placeholder="Car model" class="form-control" name="model"><br>
 
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
-            </div>
-            <br>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="twinturbo">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Twin-Turbo</label>
+                </div>
+                <br>
 
-            <input type="password" placeholder="Password" class="form-control" name="password1"><br>
-            <input type="password" placeholder="Repeat the password" class="form-control" name="password2"><br>
-            <input type="text" placeholder="Server" class="form-control" name="server"><br>
-            <button class="btn btn-primary btn-lg btn-info" type="submit">Register</button>
-        </form>
+                <input type="number" placeholder="Mileage" class="form-control" name="mileage"><br>
+                <input type="number" placeholder="Price" class="form-control" name="price"><br>
+                <button class="btn btn-primary btn-lg btn-info" type="submit">Sell</button>
+            </form>
+        </div>
     {% else %}
         <p class="text-center">You are not authenticated. If you want to sell your car, you need to <a href="{% url 'login' %}">login.</p>
     {% endif %}
