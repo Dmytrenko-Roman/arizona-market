@@ -12,6 +12,23 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+from pydantic import BaseSettings
+
+
+class Settings(BaseSettings):
+    secret_key: str
+    database_name: str
+    database_user: str
+    database_password: str
+    database_host: str
+    database_port: int
+
+    class Config:
+        env_file = "../.env"
+
+
+settings = Settings()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +38,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-)lv9bxtya+l(wr4rsniusch$76$cj69%37l5k_2vd^x-*fb==m"
+SECRET_KEY = settings.secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,11 +96,11 @@ WSGI_APPLICATION = "website.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "azmarket",
-        "USER": "postgres",
-        "PASSWORD": "hogger",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": settings.database_name,
+        "USER": settings.database_user,
+        "PASSWORD": settings.database_password,
+        "HOST": settings.database_host,
+        "PORT": settings.database_port,
     }
 }
 
