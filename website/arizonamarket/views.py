@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.views.generic import ListView
-from django.views.generic.base import RedirectView
-from django.views.generic.edit import FormView, CreateView
+from django.views.generic import ListView, CreateView, RedirectView
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 
 from .models import Car, CustomUser
@@ -16,7 +15,7 @@ class MarketPageView(ListView):
     context_object_name = "cars"
 
 
-class CarSellView(FormView):
+class CarSellView(CreateView):
     template_name = 'market/sell.html'
     form_class = CarSellForm
     success_url = '/'
@@ -45,56 +44,15 @@ class RegisterView(CreateView):
     template_name = 'market/register.html'
 
 
-# def register_request(request):
-#     msg = ""
+class Login(LoginView):
+    authentication_form = AuthenticationForm
+    form_class = AuthenticationForm
+    template_name = 'market/login.html'
+    success_url = reverse_lazy('market')
 
-#     if request.method == "POST":
-#         form = CustomUserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             msg = "Registration successful."
-#             return redirect("market")
-#         msg = "Unsuccessful registration. Invalid information."
-
-#     form = CustomUserCreationForm()
-
-#     context = {
-#         "register_form": form,
-#         "message": msg,
-#     }
-
-#     return render(
-#         request=request, template_name="market/register.html", context=context
-#     )
-
-
-def login_request(request):
-    msg = ""
-
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                msg = f"You are now logged in as {username}."
-                return redirect("market")
-            else:
-                msg = "Invalid username or password."
-        else:
-            msg = "Invalid username or password."
-
-    form = AuthenticationForm()
-
-    context = {
-        "login_form": form,
-        "message": msg,
-    }
-
-    return render(request=request, template_name="market/login.html", context=context)
+    def form_valid(self, form):
+        login(self.request, form.get_user())
+        return super(LoginView, self).form_valid(form)
 
 
 class LogoutView(RedirectView):
