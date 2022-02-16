@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic import ListView
 from django.views.generic.base import TemplateView, RedirectView
 from django.views.generic.edit import FormView, CreateView
 from django.urls import reverse_lazy
@@ -29,6 +30,17 @@ class CarSellView(FormView):
         car.owner = CustomUser.objects.get(pk=self.request.user.id)
         car.save()
         return super(CarSellView, self).form_valid(car)
+
+
+
+class SearchView(ListView):
+    model = Car
+    template_name = 'market/search.html'
+    
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        cars = Car.objects.filter(model__icontains=query)
+        return cars
 
 
 class RegisterView(CreateView):
