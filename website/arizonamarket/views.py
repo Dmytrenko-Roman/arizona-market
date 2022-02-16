@@ -1,19 +1,20 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic.base import TemplateView, RedirectView
 
 from .models import Car, CustomUser
 from .forms import CustomUserCreationForm, CarSellForm
 
 
-def market_get(request):
-    cars = Car.objects.all()
+class MarketPageView(TemplateView):
 
-    context = {
-        "cars": cars,
-    }
+    template_name = "market/market.html"
 
-    return render(request=request, template_name="market/market.html", context=context)
+    def get_context_data(self, **kwargs):
+        context = super(MarketPageView, self).get_context_data(**kwargs)
+        context['cars'] = Car.objects.all()
+        return context
 
 
 def market_post(request):
@@ -91,6 +92,11 @@ def login_request(request):
     return render(request=request, template_name="market/login.html", context=context)
 
 
-def logout_request(request):
-    logout(request)
-    return redirect("market")
+class LogoutView(RedirectView):
+    permanent = False
+    query_string = True
+    pattern_name = 'market'
+
+    def get_redirect_url(self, *args, **kwargs):
+        logout(self.request)
+        return super(LogoutView, self).get_redirect_url(*args, **kwargs)
