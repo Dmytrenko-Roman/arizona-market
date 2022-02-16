@@ -18,3 +18,7 @@ button {
 .grid-container {
   grid-template-columns: repeat(4, 1fr);
 }
+
+.search-form {
+  margin-top: 50px;
+}
