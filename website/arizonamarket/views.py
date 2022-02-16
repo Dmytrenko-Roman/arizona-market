@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import ListView
-from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic.base import RedirectView
 from django.views.generic.edit import FormView, CreateView
 from django.urls import reverse_lazy
 
@@ -10,14 +10,10 @@ from .models import Car, CustomUser
 from .forms import CustomUserCreationForm, CarSellForm
 
 
-class MarketPageView(TemplateView):
-
+class MarketPageView(ListView):
+    model = Car
     template_name = "market/market.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(MarketPageView, self).get_context_data(**kwargs)
-        context['cars'] = Car.objects.all()
-        return context
+    context_object_name = "cars"
 
 
 class CarSellView(FormView):
@@ -30,7 +26,6 @@ class CarSellView(FormView):
         car.owner = CustomUser.objects.get(pk=self.request.user.id)
         car.save()
         return super(CarSellView, self).form_valid(car)
-
 
 
 class SearchView(ListView):
