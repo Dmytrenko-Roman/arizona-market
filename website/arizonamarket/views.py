@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic.base import TemplateView, RedirectView
+from django.views.generic.edit import FormView, CreateView
+from django.urls import reverse_lazy
 
 from .models import Car, CustomUser
 from .forms import CustomUserCreationForm, CarSellForm
@@ -17,51 +19,46 @@ class MarketPageView(TemplateView):
         return context
 
 
-def market_post(request):
-    msg = ""
+class CarSellView(FormView):
+    template_name = 'market/sell.html'
+    form_class = CarSellForm
+    success_url = '/'
 
-    if request.method == "POST":
-        form = CarSellForm(request.POST)
-        if form.is_valid():
-            car = form.save(commit=False)
-            car.owner = CustomUser.objects.get(pk=request.user.id)
-            car.save()
-            msg = "Successfully sold car!"
-        else:
-            msg = "Unsuccessful. Invalid information."
-
-    form = CarSellForm()
-
-    context = {
-        "form": form,
-        "message": msg,
-    }
-
-    return render(request=request, template_name="market/sell.html", context=context)
+    def form_valid(self, form):
+        car = form.save(commit=False)
+        car.owner = CustomUser.objects.get(pk=self.request.user.id)
+        car.save()
+        return super(CarSellView, self).form_valid(car)
 
 
-def register_request(request):
-    msg = ""
+class RegisterView(CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'market/register.html'
 
-    if request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            msg = "Registration successful."
-            return redirect("market")
-        msg = "Unsuccessful registration. Invalid information."
 
-    form = CustomUserCreationForm()
+# def register_request(request):
+#     msg = ""
 
-    context = {
-        "register_form": form,
-        "message": msg,
-    }
+#     if request.method == "POST":
+#         form = CustomUserCreationForm(request.POST)
+#         if form.is_valid():
+#             user = form.save()
+#             login(request, user)
+#             msg = "Registration successful."
+#             return redirect("market")
+#         msg = "Unsuccessful registration. Invalid information."
 
-    return render(
-        request=request, template_name="market/register.html", context=context
-    )
+#     form = CustomUserCreationForm()
+
+#     context = {
+#         "register_form": form,
+#         "message": msg,
+#     }
+
+#     return render(
+#         request=request, template_name="market/register.html", context=context
+#     )
 
 
 def login_request(request):
