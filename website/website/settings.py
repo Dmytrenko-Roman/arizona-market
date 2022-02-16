@@ -55,8 +55,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "arizonamarket.apps.ArizonamarketConfig",
-    "crispy_forms",
+    "arizonamarket.apps.ArizonamarketConfig"
 ]
 
 MIDDLEWARE = [

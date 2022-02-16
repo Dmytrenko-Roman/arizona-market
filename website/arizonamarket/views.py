@@ -7,7 +7,7 @@ from .models import Car, CustomUser
 from .forms import CustomUserCreationForm, CarSellForm
 
 
-def market(request):
+def market_get(request):
     cars = Car.objects.all()
 
     context = {
@@ -17,7 +17,7 @@ def market(request):
     return render(request=request, template_name="market/market.html", context=context)
 
 
-def sell(request):
+def market_post(request):
     msg = ""
 
     if request.method == "POST":
