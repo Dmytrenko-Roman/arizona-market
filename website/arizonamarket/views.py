@@ -35,7 +35,7 @@ class CarSellView(FormView):
 
 class SearchView(ListView):
     model = Car
-    template_name = 'market/search.html'
+    template_name = 'market/market.html'
     
     def get_queryset(self):
         query = self.request.GET.get('q')
