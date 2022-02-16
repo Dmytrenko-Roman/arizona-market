@@ -48,7 +48,6 @@ class Login(LoginView):
     authentication_form = AuthenticationForm
     form_class = AuthenticationForm
     template_name = 'market/login.html'
-    success_url = reverse_lazy('market')
 
     def form_valid(self, form):
         login(self.request, form.get_user())
