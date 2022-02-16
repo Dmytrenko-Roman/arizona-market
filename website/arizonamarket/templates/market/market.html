@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block content %}
+    <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
     <div class="row justify-content-md-center grid-container" style="margin: auto;">
         {% for car in cars %}
             <div class="col-md-auto">
