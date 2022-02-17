@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 
 from .models import Car, CustomUser
 from .forms import CustomUserCreationForm, CarSellForm
+from .messages import SuccessMessageMixin
 
 
 class MarketPageView(ListView):
@@ -15,7 +16,7 @@ class MarketPageView(ListView):
     context_object_name = "cars"
 
 
-class CarSellView(CreateView):
+class CarSellView(SuccessMessageMixin, CreateView):
     template_name = 'market/sell.html'
     form_class = CarSellForm
     success_url = '/'
@@ -38,7 +39,7 @@ class SearchView(ListView):
         return cars
 
 
-class RegisterView(CreateView):
+class RegisterView(SuccessMessageMixin, CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'market/register.html'
