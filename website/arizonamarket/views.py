@@ -24,7 +24,7 @@ class CarSellView(CreateView):
         car = form.save(commit=False)
         car.owner = CustomUser.objects.get(pk=self.request.user.id)
         car.save()
-        return super(CarSellView, self).form_valid(car)
+        return super(CarSellView, self).form_valid(form)
 
 
 class SearchView(ListView):
