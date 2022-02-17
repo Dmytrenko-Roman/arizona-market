@@ -8,7 +8,6 @@ from django.urls import reverse_lazy
 from .models import Car, CustomUser
 from .forms import CustomUserCreationForm, CarSellForm
 
-
 class MarketPageView(ListView):
     model = Car
     template_name = "market/market.html"
@@ -18,7 +17,7 @@ class MarketPageView(ListView):
 class CarSellView(CreateView):
     template_name = 'market/sell.html'
     form_class = CarSellForm
-    success_url = '/'
+    success_url = '/sell'
 
     def form_valid(self, form):
         car = form.save(commit=False)

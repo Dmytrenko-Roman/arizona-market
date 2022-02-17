@@ -8,11 +8,6 @@
 
 <!--Register--> 
 <div class="container py-5">
-	{% if message %}
-		<div class="alert alert-success" role="alert">
-			{{ message }}
-		</div>
-	{% endif %}
 	<h2 class="text-center">Register</h2>
 	<form method="POST">
 		{% csrf_token %}

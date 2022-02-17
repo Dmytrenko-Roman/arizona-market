@@ -7,11 +7,6 @@
 {% block content %}
     {% if user.is_authenticated %}
         <div class="container py-5">
-            {% if message %}
-                <div class="alert alert-success" role="alert">
-                    {{ message }}
-                </div>
-	        {% endif %}
             <h2 class="text-center">Sell your car</h2>
             <form method="POST">
                 {% csrf_token %}
