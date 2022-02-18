@@ -7,13 +7,13 @@ from django.urls import reverse_lazy
 from .models import Car, CustomUser
 from .forms import CustomUserCreationForm, CarSellForm
 
-class MarketPageView(ListView):
+class MarketPage(ListView):
     model = Car
     template_name = "market/market.html"
     context_object_name = "cars"
 
 
-class CarSellView(CreateView):
+class SellPage(CreateView):
     template_name = 'market/sell.html'
     form_class = CarSellForm
     success_url = '/sell'
@@ -22,10 +22,10 @@ class CarSellView(CreateView):
         car = form.save(commit=False)
         car.owner = CustomUser.objects.get(pk=self.request.user.id)
         car.save()
-        return super(CarSellView, self).form_valid(form)
+        return super(SellPage, self).form_valid(form)
 
 
-class SearchView(ListView):
+class SearchPage(ListView):
     model = Car
     template_name = 'market/market.html'
     context_object_name = "cars"
@@ -36,7 +36,7 @@ class SearchView(ListView):
         return cars
 
 
-class RegisterView(CreateView):
+class Register(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'market/register.html'
@@ -52,11 +52,11 @@ class Login(LoginView):
         return super(LoginView, self).form_valid(form)
 
 
-class LogoutView(RedirectView):
+class Logout(RedirectView):
     permanent = False
     query_string = True
     pattern_name = 'market'
 
     def get_redirect_url(self, *args, **kwargs):
         logout(self.request)
-        return super(LogoutView, self).get_redirect_url(*args, **kwargs)
+        return super(Logout, self).get_redirect_url(*args, **kwargs)
