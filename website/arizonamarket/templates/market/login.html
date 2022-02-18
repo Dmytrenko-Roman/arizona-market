@@ -1,22 +1,20 @@
 {% extends "market/base.html" %}
 
 {% block title %}
-  Login
+    Login
 {% endblock %}
 
 {% block content %}      
-
 <!--Login--> 
 <div class="container py-5">
-  <h2 class="text-center">Login</h2>
-  <form method="POST">
-    {% csrf_token %}
-    <input type="text" placeholder="Username" class="form-control" name="username"><br>
-		<input type="password" placeholder="Password" class="form-control" name="password"><br>
-    <button class="btn btn-primary btn-lg btn-info" type="submit">Login</button>
-  </form>
-  <br>
-  <p class="text-center">Don't have an account? <a href="{% url 'register' %}">Create an account</a>.</p>
+    <h2 class="text-center">Login</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="Username" class="form-control" name="username"><br>
+        <input type="password" placeholder="Password" class="form-control" name="password"><br>
+        <button class="btn btn-primary btn-lg btn-info" type="submit">Login</button>
+    </form>
+    <br>
+    <p class="text-center">Don't have an account? <a href="{% url 'register' %}">Create an account</a>.</p>
 </div>
-
 {% endblock %}

@@ -11,13 +11,11 @@
             <form method="POST">
                 {% csrf_token %}
                 <input type="text" placeholder="Car model" class="form-control" name="model"><br>
-
                 <div class="form-check form-switch">
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="twinturbo">
                     <label class="form-check-label" for="flexSwitchCheckDefault">Twin-Turbo</label>
                 </div>
                 <br>
-
                 <input type="number" placeholder="Mileage" class="form-control" name="mileage"><br>
                 <input type="number" placeholder="Price" class="form-control" name="price"><br>
                 <button class="btn btn-primary btn-lg btn-info" type="submit">Sell</button>
