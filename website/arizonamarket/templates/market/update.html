@@ -1,0 +1,27 @@
+{% extends "market/base.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container py-5">
+            <h2 class="text-center">Update your car</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <input type="text" placeholder="Car model" class="form-control" name="model"><br>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="twinturbo">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Twin-Turbo</label>
+                </div>
+                <br>
+                <input type="number" placeholder="Mileage" class="form-control" name="mileage"><br>
+                <input type="number" placeholder="Price" class="form-control" name="price"><br>
+                <button class="btn btn-primary btn-lg btn-info" type="submit">Update</button>
+            </form>
+        </div>
+    {% else %}
+        <p class="text-center">You are not authenticated. If you want to update your car, you need to <a href="{% url 'login' %}">login.</p>
+    {% endif %}
+{% endblock %}

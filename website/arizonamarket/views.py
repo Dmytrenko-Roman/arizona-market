@@ -1,6 +1,6 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.views.generic import ListView, CreateView, RedirectView, DeleteView
+from django.views.generic import ListView, CreateView, RedirectView, UpdateView
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 
@@ -36,9 +36,16 @@ class SearchPage(ListView):
         return cars
 
 
-class DeleteCar(DeleteView):
+class CarUpdate(UpdateView):
     model = Car
-    success_url = "/"
+    fields = [
+        "model",
+        "twinturbo",
+        "mileage",
+        "price",
+    ]
+    success_url ="/"
+    template_name = 'market/update.html'
 
 
 class Register(CreateView):
