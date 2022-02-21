@@ -1,6 +1,6 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.views.generic import ListView, CreateView, RedirectView
+from django.views.generic import ListView, CreateView, RedirectView, DeleteView
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 
@@ -34,6 +34,11 @@ class SearchPage(ListView):
         query = self.request.GET.get('q')
         cars = Car.objects.filter(model__icontains=query)
         return cars
+
+
+class DeleteCar(DeleteView):
+    model = Car
+    success_url = "/"
 
 
 class Register(CreateView):
