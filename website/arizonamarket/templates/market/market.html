@@ -28,14 +28,18 @@
                 <li class="list-group-item">Пробег: {{ car.mileage }} км</li>
                 <li class="list-group-item">Сервер: {{ car.owner.server }}</li>
                 {% if car.twinturbo %}
-                <li class="list-group-item">TwinTurbo: есть</li>
+                    <li class="list-group-item">TwinTurbo: есть</li>
                 {% else %}
-                <li class="list-group-item">TwinTurbo: нет</li>
+                    <li class="list-group-item">TwinTurbo: нет</li>
                 {% endif %}
                 {% if car.price != 0 %}
-                <li class="list-group-item">Цена: {{ car.price }}$</li>
+                    <li class="list-group-item">Цена: {{ car.price }}$</li>
                 {% else %}
-                <li class="list-group-item">Цена: договорная</li>
+                    <li class="list-group-item">Цена: договорная</li>
+                {% endif %}
+
+                {% if user.username == car.owner.username %}
+                    <li><a href="{% url 'update' pk=car.id %}"><button>Update</button></a></li>
                 {% endif %}
             </ul>
         </div>

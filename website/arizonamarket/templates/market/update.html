@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and user.username == car.owner.username %}
         <div class="container py-5">
             <h2 class="text-center">Update your car</h2>
             <form method="POST">
