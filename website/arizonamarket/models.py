@@ -14,10 +14,11 @@ class CustomUser(AbstractUser):
 
 
 class Car(models.Model):
-    model = models.TextField(null=False)
+    model = models.TextField(max_length=30, null=False)
     twinturbo = models.BooleanField(default=False)
     mileage = models.IntegerField(null=False)
-    price = models.IntegerField(default=0)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    is_deleted = models.BooleanField(default=False)
 
     owner = models.ForeignKey("CustomUser", on_delete=models.SET_NULL, null=True)
 
