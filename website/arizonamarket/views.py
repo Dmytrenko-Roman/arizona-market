@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from .models import Car, CustomUser
 from .forms import CustomUserCreationForm, CarSellForm
 
+
 class MarketPage(ListView):
     model = Car
     template_name = "market/market.html"
@@ -34,6 +35,15 @@ class SearchPage(ListView):
         query = self.request.GET.get('q')
         cars = Car.objects.filter(model__icontains=query)
         return cars
+
+
+class MyCarsPage(ListView):
+    model = Car
+    template_name = 'market/mycars.html'
+    context_object_name = "cars"
+
+    def get_queryset(self):
+        return Car.objects.filter(owner=self.request.user.id)
 
 
 class CarUpdate(UpdateView):

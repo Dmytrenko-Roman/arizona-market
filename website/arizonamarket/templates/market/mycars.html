@@ -4,17 +4,6 @@
     Arizona Market
 {% endblock %}
 
-{% block search %}
-    <form action="{% url 'search' %}" class="row g-1">
-        <div class="col-auto">
-            <input name="q" class="form-control me-2" type="search" placeholder="Search for model" aria-label="Search">
-        </div>
-        <div class="col-auto">
-            <button class="btn btn-success" type="submit">Search</button>
-        </div>
-    </form>
-{% endblock %}
-
 {% block content %}
 <div class="row justify-content-md-center grid-container" style="margin: auto;">
     {% for car in cars %}
@@ -37,6 +26,10 @@
                 {% else %}
                     <li class="list-group-item">Цена: договорная</li>
                 {% endif %}
+                    <li class="list-group-item">
+                        <a href="{% url 'update' pk=car.id %}"><button type="button" class="btn btn-info">Update</button></a>
+                        <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
+                    </li>
             </ul>
         </div>
     </div>
