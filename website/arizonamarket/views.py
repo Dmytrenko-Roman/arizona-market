@@ -15,9 +15,9 @@ class MarketPage(ListView):
 
 
 class SellPage(CreateView):
-    template_name = 'market/sell.html'
+    template_name = "market/sell.html"
     form_class = CarSellForm
-    success_url = '/sell'
+    success_url = "/sell"
 
     def form_valid(self, form):
         car = form.save(commit=False)
@@ -28,18 +28,18 @@ class SellPage(CreateView):
 
 class SearchPage(ListView):
     model = Car
-    template_name = 'market/market.html'
+    template_name = "market/market.html"
     context_object_name = "cars"
-    
+
     def get_queryset(self):
-        query = self.request.GET.get('q')
+        query = self.request.GET.get("q")
         cars = Car.objects.filter(model__icontains=query)
         return cars
 
 
 class MyCarsPage(ListView):
     model = Car
-    template_name = 'market/mycars.html'
+    template_name = "market/mycars.html"
     context_object_name = "cars"
 
     def get_queryset(self):
@@ -54,20 +54,20 @@ class CarUpdate(UpdateView):
         "mileage",
         "price",
     ]
-    success_url ="/mycars"
-    template_name = 'market/update.html'
+    success_url = "/mycars"
+    template_name = "market/update.html"
 
 
 class Register(CreateView):
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'market/register.html'
+    success_url = reverse_lazy("login")
+    template_name = "market/register.html"
 
 
 class Login(LoginView):
     authentication_form = AuthenticationForm
     form_class = AuthenticationForm
-    template_name = 'market/login.html'
+    template_name = "market/login.html"
 
     def form_valid(self, form):
         login(self.request, form.get_user())
@@ -77,7 +77,7 @@ class Login(LoginView):
 class Logout(RedirectView):
     permanent = False
     query_string = True
-    pattern_name = 'market'
+    pattern_name = "market"
 
     def get_redirect_url(self, *args, **kwargs):
         logout(self.request)

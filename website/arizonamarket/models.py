@@ -10,7 +10,7 @@ class CustomUser(AbstractUser):
         return self.username
 
     def get_absolute_url(self):
-        return reverse('market')
+        return reverse("market")
 
 
 class Car(models.Model):
@@ -26,4 +26,4 @@ class Car(models.Model):
         return self.model
 
     def get_absolute_url(self):
-        return reverse('market')
+        return reverse("market")
