@@ -54,7 +54,7 @@ class CarUpdate(UpdateView):
         "mileage",
         "price",
     ]
-    success_url ="/"
+    success_url ="/mycars"
     template_name = 'market/update.html'
 
 

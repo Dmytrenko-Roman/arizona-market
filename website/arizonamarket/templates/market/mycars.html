@@ -5,34 +5,37 @@
 {% endblock %}
 
 {% block content %}
-<div class="row justify-content-md-center grid-container" style="margin: auto;">
-    {% for car in cars %}
-    <div class="col-md-auto">
-        <div class="card" style="width: 18rem; color: #353535; margin-top: 20px;">
-            <div class="card-body">
-                <h5 class="card-title">{{ car.model }}</h5>
-                <p class="card-text">Владелец: {{ car.owner.username }}</p>
+{% if user.is_authenticated %}
+    <div class="row justify-content-md-center grid-container" style="margin: auto;">
+        {% for car in cars %}
+        <div class="col-md-auto">
+            <div class="card" style="width: 18rem; color: #353535; margin-top: 20px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ car.model }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Пробег: {{ car.mileage }} км</li>
+                    <li class="list-group-item">Сервер: {{ car.owner.server }}</li>
+                    {% if car.twinturbo %}
+                        <li class="list-group-item">TwinTurbo: есть</li>
+                    {% else %}
+                        <li class="list-group-item">TwinTurbo: нет</li>
+                    {% endif %}
+                    {% if car.price != 0 %}
+                        <li class="list-group-item">Цена: {{ car.price }}$</li>
+                    {% else %}
+                        <li class="list-group-item">Цена: договорная</li>
+                    {% endif %}
+                        <li class="list-group-item">
+                            <a href="{% url 'update' pk=car.id %}"><button type="button" class="btn btn-info">Update</button></a>
+                            <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
+                        </li>
+                </ul>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Пробег: {{ car.mileage }} км</li>
-                <li class="list-group-item">Сервер: {{ car.owner.server }}</li>
-                {% if car.twinturbo %}
-                    <li class="list-group-item">TwinTurbo: есть</li>
-                {% else %}
-                    <li class="list-group-item">TwinTurbo: нет</li>
-                {% endif %}
-                {% if car.price != 0 %}
-                    <li class="list-group-item">Цена: {{ car.price }}$</li>
-                {% else %}
-                    <li class="list-group-item">Цена: договорная</li>
-                {% endif %}
-                    <li class="list-group-item">
-                        <a href="{% url 'update' pk=car.id %}"><button type="button" class="btn btn-info">Update</button></a>
-                        <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
-                    </li>
-            </ul>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+{% else %}
+    <p class="text-center">You are not authenticated. If you want to update your car, you need to <a href="{% url 'login' %}">login.</p>
+{% endif %}
 {% endblock %}
