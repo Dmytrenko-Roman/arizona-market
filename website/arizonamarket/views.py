@@ -13,17 +13,6 @@ class MarketPage(ListView):
     template_name = "market/market.html"
     context_object_name = "cars"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['highlights'] = {
-            'market': 'active',
-            'sell': '',
-            'mycars': '',
-            'login': '',
-            'register': '',
-        }
-        return context
-
 
 class SellPage(CreateView):
     template_name = "market/sell.html"
@@ -35,17 +24,6 @@ class SellPage(CreateView):
         car.owner = CustomUser.objects.get(pk=self.request.user.id)
         car.save()
         return super(SellPage, self).form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['highlights'] = {
-            'market': '',
-            'sell': 'active',
-            'mycars': '',
-            'login': '',
-            'register': '',
-        }
-        return context
 
 
 class SearchPage(ListView):
