@@ -58,6 +58,10 @@ class CarUpdate(UpdateView):
     template_name = "market/update.html"
 
 
+class CarDelete(UpdateView):
+    ...
+
+
 class Register(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy("login")

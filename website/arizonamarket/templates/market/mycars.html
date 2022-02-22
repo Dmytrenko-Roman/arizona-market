@@ -29,7 +29,7 @@
                             {% endif %}
                                 <li class="list-group-item">
                                     <a href="{% url 'update' pk=car.id %}"><button type="button" class="btn btn-info">Update</button></a>
-                                    <a href="#"><button type="button" class="btn btn-danger">Delete</button></a>
+                                    <a href="{% url 'delete' pk=car.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
                                 </li>
                         </ul>
                     </div>
