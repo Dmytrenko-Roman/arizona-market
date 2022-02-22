@@ -7,13 +7,15 @@
 {% block content %}
     {% if user.is_authenticated and user.username == car.owner.username %}
         <div class="container py-5">
-            <h2 class="text-center">Delete your car</h2>
+            <h2 class="text-center">Are you sure?</h2>
             <form method="POST">
                 {% csrf_token %}
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="is_deleted">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Are you sure?</label>
-                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" name="is_deleted">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Yes.
+                    </label>
+                </div><br>
                 <button class="btn btn-primary btn-lg btn-info" type="delete">Delete</button>
             </form>
         </div>

@@ -18,28 +18,30 @@
 {% block content %}
 <div class="row justify-content-md-center grid-container" style="margin: auto;">
     {% for car in cars %}
-    <div class="col-md-auto">
-        <div class="card" style="width: 18rem; color: #353535; margin-top: 20px;">
-            <div class="card-body">
-                <h5 class="card-title">{{ car.model }}</h5>
-                <p class="card-text">Владелец: {{ car.owner.username }}</p>
+        {% if car.is_deleted == False %}
+            <div class="col-md-auto">
+                <div class="card" style="width: 18rem; color: #353535; margin-top: 20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ car.model }}</h5>
+                        <p class="card-text">Владелец: {{ car.owner.username }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Пробег: {{ car.mileage }} км</li>
+                        <li class="list-group-item">Сервер: {{ car.owner.server }}</li>
+                        {% if car.twinturbo %}
+                            <li class="list-group-item">TwinTurbo: есть</li>
+                        {% else %}
+                            <li class="list-group-item">TwinTurbo: нет</li>
+                        {% endif %}
+                        {% if car.price != 0 %}
+                            <li class="list-group-item">Цена: {{ car.price }}$</li>
+                        {% else %}
+                            <li class="list-group-item">Цена: договорная</li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Пробег: {{ car.mileage }} км</li>
-                <li class="list-group-item">Сервер: {{ car.owner.server }}</li>
-                {% if car.twinturbo %}
-                    <li class="list-group-item">TwinTurbo: есть</li>
-                {% else %}
-                    <li class="list-group-item">TwinTurbo: нет</li>
-                {% endif %}
-                {% if car.price != 0 %}
-                    <li class="list-group-item">Цена: {{ car.price }}$</li>
-                {% else %}
-                    <li class="list-group-item">Цена: договорная</li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
+        {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
