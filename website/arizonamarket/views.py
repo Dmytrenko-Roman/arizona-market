@@ -60,6 +60,8 @@ class CarUpdate(UpdateView):
 
 class CarDelete(UpdateView):
     model = Car
+    fields = ['is_deleted']
+    template_name = "market/delete.html"
 
 
 class Register(CreateView):
