@@ -23,14 +23,14 @@
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li>
-                            <a class="nav-link active" href="{% url 'market' %}">Market</a>
+                            <a class="nav-link {{ highlights.market }}" href="{% url 'market' %}">Market</a>
                         </li>
                         {% if user.is_authenticated %}
                         <li>            
-                            <a class="nav-link" href="{% url 'sell' %}">Sell</a>
+                            <a class="nav-link {{ highlights.sell }}" href="{% url 'sell' %}">Sell</a>
                         </li>
                         <li>            
-                            <a class="nav-link" href="{% url 'mycars' %}">My cars</a>
+                            <a class="nav-link {{ highlights.mycars }}" href="{% url 'mycars' %}">My cars</a>
                         </li>
                         {% endif %}
                     </ul>
@@ -50,10 +50,10 @@
                         </li>
                         {% else %}
                         <li>
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            <a class="nav-link {{ highlights.login }}" href="{% url 'login' %}">Login</a>
                         </li>
                         <li>
-                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                            <a class="nav-link {{ highlights.register }}" href="{% url 'register' %}">Register</a>
                         </li>
                         {% endif %}
                     </ul>
