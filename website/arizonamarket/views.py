@@ -59,7 +59,14 @@ class CarUpdate(UpdateView):
 
 
 class CarDelete(UpdateView):
-    ...
+    model = Car
+    fields = ['is_deleted']
+    success_url = "/mycars"
+
+    def post(self, request, pk):
+        post_delete = Car.objects.filter(pk=pk)
+        post_delete.update(is_deleted=True)
+        return super(Car, self).post(request, pk)
 
 
 class Register(CreateView):
