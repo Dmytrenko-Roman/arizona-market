@@ -13,7 +13,6 @@ class MarketPage(ListView):
     template_name = "market/market.html"
     context_object_name = "cars"
 
-
 class SellPage(CreateView):
     template_name = "market/sell.html"
     form_class = CarSellForm

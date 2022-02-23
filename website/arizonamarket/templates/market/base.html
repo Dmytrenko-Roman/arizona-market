@@ -22,11 +22,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarScroll">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li>
-                            <a class="nav-link {% if '/market' in request.path %}active{% endif %}" href="{% url 'market' %}">
-                                Market
-                            </a>
-                        </li>
                         {% if user.is_authenticated %}
                         <li>            
                             <a class="nav-link {% if '/sell' in request.path %}active{% endif %}" href="{% url 'sell' %}">
