@@ -9,6 +9,9 @@ from .forms import CustomUserCreationForm, CarSellForm
 
 
 class MarketPage(ListView):
+    """
+    
+    """
     model = Car
     template_name = "market/market.html"
     context_object_name = "cars"
